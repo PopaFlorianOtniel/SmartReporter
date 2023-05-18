@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> My Profile </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="preview">
+    <ion-avatar (click)="changeImage()">
+      <img *ngIf="profile && profile['imageUrl']; else placheolder_avatar;"
+        [src]="profile['imageUrl']" />
+      <ng-template #placheolder_avatar>
+        <div class="fallback">
+          <ion-button>Select avatar</ion-button>
+        </div>
+      </ng-template>
+    </ion-avatar>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let report of reports"
+        (click)="openReport(report)">
+      <ion-label>
+        {{ report.title }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addReport()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
